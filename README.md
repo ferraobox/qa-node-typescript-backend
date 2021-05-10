@@ -1,0 +1,34 @@
+# PETSTORE NODEJS TYPESCRIPT
+
+This project is a little template that how to make the diferent testing layers in node backend.
+
+### Prerequisites
+
+Docker Desktop installed and Node 12 or higher
+
+## API testing project
+
+You should do the following steps:
+
+```
+> docker run  --name swaggerapi-petstore3 -d -p 8080:8080 swaggerapi/petstore3:latest
+```
+
+On Terminal into project path:
+
+```
+> cd api
+> npm i
+> npm run test
+```
+
+A list of test cases proposed for automation:
+
+- You can see all test cases into the reports folder, you just need to open the .html file.
+
+A short explanation of the provided solution.
+
+- I've use Typescript because is an oriented and typed language with an easy way to build, configure and launch whatever thing you want to do.
+- I use Jest as test runner because is a delightful Testing Framework with a focus on simplicity.
+
+The reports are located on reports folder into api project.
