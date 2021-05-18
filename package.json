@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "REST Api testing",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ferraobox/qanodebackend.git"
+  },
   "scripts": {
     "test": ". ./setup/runDocker.sh && jest src/test --forceExit && . ./setup/stopDocker.sh",
     "test:unit": "jest src/test/unit --forceExit",

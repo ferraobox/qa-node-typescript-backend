@@ -2,11 +2,11 @@ import 'reflect-metadata';
 
 export function makeTest(desc: string, cb: () => void): void {
   describe(desc, () => {
-    beforeAll(() => {
-      console.log('Before All');
+    beforeAll(async () => {
+      // console.log('Before');
     });
     afterAll(() => {
-      console.log('After All');
+      // console.log('After All');
     });
 
     cb();
