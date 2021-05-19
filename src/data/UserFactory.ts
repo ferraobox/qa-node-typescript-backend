@@ -3,7 +3,7 @@ import faker, { fake } from 'faker';
 
 export function newUser(): User {
   return new User({
-    id: faker.random.number(),
+    id: faker.datatype.number(),
     username: faker.name.firstName().toLowerCase(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -17,7 +17,7 @@ export function newUser(): User {
 export function newUsersList(): User[] {
   return [
     new User({
-      id: faker.random.number(),
+      id: faker.datatype.number(),
       username: faker.name.firstName().toLowerCase(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -26,7 +26,7 @@ export function newUsersList(): User[] {
       phone: faker.phone.phoneNumber(),
     }),
     new User({
-      id: faker.random.number(),
+      id: faker.datatype.number(),
       username: faker.name.firstName().toLowerCase(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
