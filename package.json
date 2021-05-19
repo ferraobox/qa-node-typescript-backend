@@ -1,6 +1,6 @@
 {
   "name": "qa-node-typescript-backend",
-  "version": "1.0.1",
+  "version": "0.2.0",
   "description": "REST Api testing",
   "main": "index.js",
   "repository": {

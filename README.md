@@ -10,17 +10,17 @@ Docker Desktop installed and Node 12 or higher
 
 You should do the following steps:
 
-```
-> docker run  --name swaggerapi-petstore3 -d -p 8080:8080 swaggerapi/petstore3:latest
-```
-
 On Terminal into project path:
 
 ```
-> cd api
 > npm i
 > npm run test
 ```
+
+### Github tools
+
+- Github actions for automating the release
+- Pull request tempplate
 
 A list of test cases proposed for automation:
 
