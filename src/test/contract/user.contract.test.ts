@@ -3,23 +3,20 @@ import { UserController } from '../../controllers/UserController';
 import { newUser, newUsersList } from '../../data/UserFactory';
 import { Response } from '../../../client/CustomResponse';
 import { User } from '../../models/User';
-import { SwaggerCheck } from '../../../utils/SwaggerCheck';
 
 makeTest('Contract test - User Controller', () => {
   let userController: UserController;
   let user: User;
   let users: User[];
-  let swagger: SwaggerCheck;
 
   beforeAll(() => {
     userController = new UserController('http://localhost:8080/api/v3');
-    swagger = new SwaggerCheck(`${process.env.PWD}/openapiswagger.yml`);
   });
 
   test('Add new User - 200 OK - check swagger specification', async () => {
     user = newUser();
     const response: Response = await userController.createUser(user);
-    const swaggerErrors = swagger.validateSchema('/user', 'post', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/user', 'post', response.statusCode, response.body);
     expect(response.statusCode).toEqual(200);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
@@ -39,7 +36,7 @@ makeTest('Contract test - User Controller', () => {
   test('Get user by userName - 200 OK - check swagger specification', async () => {
     const response: Response = await userController.getUserByuserName(user.username);
     expect(response.statusCode).toEqual(200);
-    const swaggerErrors = swagger.validateSchema('/user/{username}', 'get', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/user/{username}', 'get', response.statusCode, response.body);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
 
@@ -49,7 +46,7 @@ makeTest('Contract test - User Controller', () => {
     user.phone = 111111111;
     const response: Response = await userController.updateUser(user.username, user);
     expect(response.statusCode).toEqual(200);
-    const swaggerErrors = swagger.validateSchema('/user/{username}', 'put', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/user/{username}', 'put', response.statusCode, response.body);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
 
@@ -75,7 +72,7 @@ makeTest('Contract test - User Controller', () => {
   test('Add new Users from list - 200 OK - check swagger specification', async () => {
     users = newUsersList();
     const response: Response = await userController.createUsersWithList(users);
-    const swaggerErrors = swagger.validateSchema('/user/createWithList', 'post', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/user/createWithList', 'post', response.statusCode, response.body);
     expect(response.statusCode).toEqual(200);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });

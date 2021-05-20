@@ -3,29 +3,26 @@ import { PetController } from '../../controllers/PetController';
 import { newPet } from '../../data/PetFactory';
 import { Response } from '../../../client/CustomResponse';
 import { Pet } from '../../models/Pet';
-import { SwaggerCheck } from '../../../utils/SwaggerCheck';
 
 makeTest('Contract test - Pet Controller', () => {
   let petController: PetController;
   let pet: Pet;
-  let swagger: SwaggerCheck;
 
   beforeAll(() => {
     petController = new PetController('http://localhost:8080/api/v3');
-    swagger = new SwaggerCheck(`${process.env.PWD}/openapiswagger.yml`);
   });
 
   test('Add new Pet - 200 OK - check swagger specification', async () => {
     pet = newPet();
     const response: Response = await petController.addANew(pet);
     expect(response.statusCode).toEqual(200);
-    const swaggerErrors = swagger.validateSchema('/pet', 'post', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/pet', 'post', response.statusCode, response.body);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
 
   test('Find Existing pet by id - 200 OK - check swagger specification', async () => {
     const response: Response = await petController.findById(pet.id);
-    const swaggerErrors = swagger.validateSchema('/pet/{petId}', 'get', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/pet/{petId}', 'get', response.statusCode, response.body);
     expect(response.statusCode).toEqual(200);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
@@ -39,7 +36,7 @@ makeTest('Contract test - Pet Controller', () => {
   test('Update Existing pet by id - 200 OK - check swagger specification', async () => {
     pet.status = 'sold';
     const response: Response = await petController.updateAnExisting(pet);
-    const swaggerErrors = swagger.validateSchema('/pet', 'put', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/pet', 'put', response.statusCode, response.body);
     expect(response.statusCode).toEqual(200);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
@@ -47,7 +44,7 @@ makeTest('Contract test - Pet Controller', () => {
   test('Find Updated pet by Status - 200 OK - check swagger specification', async () => {
     const response: Response = await petController.findByStatus('sold');
     expect(response.statusCode).toEqual(200);
-    const swaggerErrors = swagger.validateSchema('/pet/findByStatus', 'get', response.statusCode, response.body);
+    const swaggerErrors = globalThis.swagger.validateSchema('/pet/findByStatus', 'get', response.statusCode, response.body);
     expect(swaggerErrors.length === 0).toBeTruthy();
   });
 

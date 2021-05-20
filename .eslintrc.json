@@ -1,0 +1,39 @@
+{
+  "env": {
+    "commonjs": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "extends": ["plugin:jest/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2019
+  },
+  "plugins": ["@typescript-eslint", "jest"],
+  "rules": {
+    "no-param-reassign": "warn",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "class-methods-use-this": "off",
+    "lines-between-class-members": "off",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "jest/valid-title": "off",
+    "no-restricted-syntax": "warn",
+    "no-await-in-loop": "warn",
+    "camelcase": "off",
+    "no-empty-function": "warn",
+    "no-useless-constructor": "off"
+  }
+}

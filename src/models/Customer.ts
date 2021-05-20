@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity } from 'typeorm';
 import { Address } from './Address';
 import * as _ from 'lodash';
 

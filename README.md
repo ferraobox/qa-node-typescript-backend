@@ -1,14 +1,25 @@
-![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
-[![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
-![Code Climate coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
+### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
+
+### CI result - [![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+
+### Code Climate - ![Code Climate coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
 
 # PETSTORE NODEJS TYPESCRIPT
 
 This project is a little template that how to make the diferent testing layers in node backend.
 
+Quality there are not only on the test, the processes are important, on the following link you can se a litle list of basic checks:
+
+- Code coverage with code climate and jest
+- Branch protection
+  - PR reviews are mandatories with template (Defined on Github project)
+  - Husky pre hooks, run linter on pre-commit hook
+- Run test on Github actions CI - Release Workflow
+- Custom .eslintrc.json configuration for preserve the code quality
+
 ### Prerequisites
 
-Docker Desktop installed and Node 12 or higher
+Docker Desktop installed and Node 14 or higher
 
 ## API testing project
 
@@ -36,3 +47,11 @@ A short explanation of the provided solution.
 - I use Jest as test runner because is a delightful Testing Framework with a focus on simplicity.
 
 The reports are located on reports folder into api project.
+
+### Artifacts
+
+The Artifacts are on workflow action section.
+
+https://github.com/ferraobox/qa-node-typescript-backend/actions/
+
+you can check them opening the specific run.

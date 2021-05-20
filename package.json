@@ -17,7 +17,8 @@
     "clean": "tsc --build --clean",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}'",
     "bump": "npm version $VERSION --no-git-tag-version",
-    "postbump": "git add package.json package-lock.json && git commit -m 'Bump version'"
+    "postbump": "git add package.json package-lock.json && git commit -m 'Bump version'",
+    "prepare": "husky install"
   },
   "jest": {
     "testMatch": [
@@ -47,12 +48,12 @@
     "ajv": "^6.12.6",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-prettier": "^3.3.0",
     "faker": "^5.3.1",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "jest-html-reporters": "^2.1.2",
-    "openapi-types": "^9.0.0",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.0",
     "typescript": "^4.1.3"

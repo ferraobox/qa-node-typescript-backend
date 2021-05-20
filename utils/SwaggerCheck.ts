@@ -1,11 +1,9 @@
 import SwaggerParser from '@apidevtools/swagger-parser';
-import { OpenAPI } from 'openapi-types';
 import * as AJV from 'ajv';
 import { ValidateType } from './ValidateTypes';
 
 class SwaggerCheck {
   swaggerpath: string;
-  apiDefinition: OpenAPI.Document<any> | undefined;
   schema: object;
   ajv = new AJV.default({
     meta: true,
@@ -23,8 +21,7 @@ class SwaggerCheck {
     SwaggerParser.validate(this.swaggerpath, (err, api) => {
       if (err) throw err;
       else {
-        this.apiDefinition = api;
-        this.schema = JSON.parse(JSON.stringify(this.apiDefinition));
+        this.schema = JSON.parse(JSON.stringify(api));
       }
     });
   }

@@ -12,11 +12,6 @@ makeTest('INT - Store Controller', () => {
     storeController = new StoreController('http://localhost:8080/api/v3');
   });
 
-  // test('Get inventories by status - 200 OK', async () => {
-  //   const response: Response = await storeController.inventoriesByStatus();
-  //   expect(response.statusCode).toEqual(200);
-  // });
-
   test('Add new Order - 200 OK', async () => {
     order = newOrder();
     const response: Response = await storeController.placeAnOrder(order);

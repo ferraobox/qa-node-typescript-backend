@@ -1,5 +1,5 @@
 import { User } from '../models/User';
-import faker, { fake } from 'faker';
+import faker from 'faker';
 
 export function newUser(): User {
   return new User({
