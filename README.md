@@ -1,5 +1,6 @@
 ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
-[![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+![[CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+![Code Climate coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
 
 # PETSTORE NODEJS TYPESCRIPT
 
