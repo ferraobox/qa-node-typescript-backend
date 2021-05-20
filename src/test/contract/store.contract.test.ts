@@ -12,7 +12,7 @@ makeTest('Contract test - Store Controller', () => {
 
   beforeAll(() => {
     storeController = new StoreController('http://localhost:8080/api/v3');
-    swagger = new SwaggerCheck('./openapiswagger.yml');
+    swagger = new SwaggerCheck(`${process.env.PWD}/openapiswagger.yml`);
   });
 
   // test('Get inventories by status - 200 OK - check swagger specification', async () => {

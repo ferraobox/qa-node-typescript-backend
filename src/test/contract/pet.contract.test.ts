@@ -12,7 +12,7 @@ makeTest('Contract test - Pet Controller', () => {
 
   beforeAll(() => {
     petController = new PetController('http://localhost:8080/api/v3');
-    swagger = new SwaggerCheck('./openapiswagger.yml');
+    swagger = new SwaggerCheck(`${process.env.PWD}/openapiswagger.yml`);
   });
 
   test('Add new Pet - 200 OK - check swagger specification', async () => {
