@@ -1,3 +1,5 @@
+[![Release](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+
 # PETSTORE NODEJS TYPESCRIPT
 
 This project is a little template that how to make the diferent testing layers in node backend.
