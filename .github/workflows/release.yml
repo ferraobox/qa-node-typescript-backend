@@ -27,10 +27,18 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{env.ACT_NODE_VERSION}}
-      - name: Run tests
+      - name: Run UNIT tests
         run: |
           npm i
-          npm run test
+          npm run test:unit
+      - name: Run Contract tests
+      run: |
+        npm i
+        npm run test:contract
+      - name: Run INT tests
+      run: |
+        npm i
+        npm run test:int
       - name: Upload reports
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
