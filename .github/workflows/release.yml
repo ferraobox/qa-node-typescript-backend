@@ -30,15 +30,9 @@ jobs:
       - name: Install dependences
         run: |
           npm i
-      - name: Run UNIT tests
+      - name: Run test
         run: |
-          npm run test:unit
-      - name: Run Contract tests
-        run: |
-          npm run test:contract
-      - name: Run INT tests
-        run: |
-          npm run test:int
+          npm run test
       - name: Upload reports
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
