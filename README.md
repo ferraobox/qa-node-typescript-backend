@@ -1,4 +1,5 @@
-[![Release](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
+[![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
 
 # PETSTORE NODEJS TYPESCRIPT
 
