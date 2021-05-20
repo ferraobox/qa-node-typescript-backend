@@ -78,7 +78,7 @@ class ApiController {
     const options = this.options;
     options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
-    console.log(`POST: ${this.baseUrl}${endpoint}`.blue);
+    //console.log(`POST: ${this.baseUrl}${endpoint}`.blue);
     return this.got
       .post(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -95,7 +95,7 @@ class ApiController {
     const options = this.options;
     if (headers) options.headers = headers;
     options.body = undefined;
-    console.log(`GET: ${this.baseUrl}${endpoint}`.cyan);
+    //console.log(`GET: ${this.baseUrl}${endpoint}`.cyan);
     return this.got
       .get(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -112,7 +112,7 @@ class ApiController {
     const options = this.options;
     options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
-    console.log(`PUT: ${this.baseUrl}${endpoint}`.cyan);
+    //console.log(`PUT: ${this.baseUrl}${endpoint}`.cyan);
     return this.got
       .put(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -129,7 +129,7 @@ class ApiController {
     const options = this.options;
     options.body = JSON.stringify(body);
     if (headers) options.headers = headers;
-    console.log(`PATCH: ${this.baseUrl}${endpoint}`.cyan);
+    //console.log(`PATCH: ${this.baseUrl}${endpoint}`.cyan);
     return this.got
       .patch(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -146,7 +146,7 @@ class ApiController {
     const options = this.options;
     if (headers) options.headers = headers;
     options.body = undefined;
-    console.log(`DELETE: ${this.baseUrl}${endpoint}`.cyan);
+    //console.log(`DELETE: ${this.baseUrl}${endpoint}`.cyan);
     return this.got
       .delete(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
