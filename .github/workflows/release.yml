@@ -7,6 +7,7 @@ name: Release
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 env:
   ACT_NODE_VERSION: 12
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
