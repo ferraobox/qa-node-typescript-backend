@@ -1,3 +1,6 @@
+const { defaults } = require('jest-config');
+const basePathToIgnore = ['.github/', './node_modules/'];
+const pathsToTest = ['./src/controllers/**.ts'];
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -12,4 +15,12 @@ module.exports = {
       },
     ],
   ],
+
+  clearMocks: true,
+  collectCoverage: true,
+  collectCoverageFrom: pathsToTest,
+  coverageReporters: ['json', 'json-summary', 'text', 'lcov'],
+  coverageDirectory: './reports/coverage/',
+  moduleFileExtensions: defaults.moduleFileExtensions,
+  testPathIgnorePatterns: basePathToIgnore,
 };

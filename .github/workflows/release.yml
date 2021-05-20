@@ -8,7 +8,7 @@ on:
   push:
     branches: [master]
 env:
-  ACT_NODE_VERSION: 12.x
+  ACT_NODE_VERSION: 12
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,6 +22,21 @@ jobs:
           ref: ${{ github.event.client_payload.branch }}
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           submodules: 'recursive'
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{env.ACT_NODE_VERSION}}
+      - name: Run tests
+        run: |
+          npm i
+          npm run test
+      - name: Upload reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: |
+            ./reports/coverage/lcov-report/
+            ./reports/*.html
       - name: Bump version and push tag
         id: create_tag
         uses: mathieudutour/github-tag-action@v4.5
