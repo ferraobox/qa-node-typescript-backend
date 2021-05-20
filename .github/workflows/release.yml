@@ -9,7 +9,7 @@ on:
     branches: [master]
   workflow_dispatch:
 env:
-  ACT_NODE_VERSION: 12
+  ACT_NODE_VERSION: 14
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,6 +32,7 @@ jobs:
           npm i
           npm run test
       - name: Upload reports
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: reports
