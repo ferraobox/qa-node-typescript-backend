@@ -6,6 +6,7 @@ import { ValidateType } from './ValidateTypes';
 class SwaggerCheck {
   swaggerpath: string;
   apiDefinition: OpenAPI.Document<any> | undefined;
+  schema: object;
   ajv = new AJV.default({
     meta: true,
     coerceTypes: false,
@@ -21,17 +22,17 @@ class SwaggerCheck {
   setUpSwaggerApi(): void {
     SwaggerParser.validate(this.swaggerpath, (err, api) => {
       if (err) throw err;
-      else this.apiDefinition = api;
+      else {
+        this.apiDefinition = api;
+        this.schema = JSON.parse(JSON.stringify(this.apiDefinition));
+      }
     });
   }
 
   validateSchema(endpoint: string, method: string, response: number, body: any): ValidateType[] {
     // Postman library Ajv
     const result: ValidateType[] = [];
-
-    console.log('***** JSON.stringify(this.apiDefinition)', JSON.stringify(this.apiDefinition));
-
-    let schema = JSON.parse(JSON.stringify(this.apiDefinition));
+    let schema: any = this.schema;
     this.ajv.validateSchema(schema);
     schema = schema.paths[endpoint][method].responses;
     //Check if there are response defined, else we use default response
