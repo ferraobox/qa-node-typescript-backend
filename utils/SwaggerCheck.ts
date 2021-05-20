@@ -14,15 +14,17 @@ class SwaggerCheck {
 
   constructor(swaggerpath: string) {
     this.swaggerpath = swaggerpath;
-    this.setUpSwaggerApi();
   }
 
-  setUpSwaggerApi(): void {
-    SwaggerParser.validate(this.swaggerpath, (err, api) => {
-      if (err) throw err;
-      else {
-        this.schema = JSON.parse(JSON.stringify(api));
-      }
+  setUpSwaggerApi(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      SwaggerParser.validate(this.swaggerpath, (err, api) => {
+        if (err) throw reject(err);
+        else {
+          this.schema = JSON.parse(JSON.stringify(api));
+          resolve();
+        }
+      });
     });
   }
 
