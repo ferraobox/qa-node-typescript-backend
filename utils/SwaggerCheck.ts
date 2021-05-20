@@ -28,6 +28,9 @@ class SwaggerCheck {
   validateSchema(endpoint: string, method: string, response: number, body: any): ValidateType[] {
     // Postman library Ajv
     const result: ValidateType[] = [];
+
+    console.log('***** JSON.stringify(this.apiDefinition)', JSON.stringify(this.apiDefinition));
+
     let schema = JSON.parse(JSON.stringify(this.apiDefinition));
     this.ajv.validateSchema(schema);
     schema = schema.paths[endpoint][method].responses;
