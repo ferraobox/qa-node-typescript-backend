@@ -3,6 +3,9 @@
 ![npm](https://img.shields.io/badge/-npm-000?&logo=npm)
 ![MongoDB](https://img.shields.io/badge/-MongoDB-000?&logo=mongodb)
 ![Jest](https://img.shields.io/badge/-jest-000?&logo=jest)
+![eslint](https://img.shields.io/badge/-eslint-000?&logo=eslint)
+![GitHubActions](https://img.shields.io/badge/-GitHubActions-000?&logo=github-actions)
+![CodeClimate](https://img.shields.io/badge/-CodeClimate-000?&logo=code-climate)
 
 ### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
 
