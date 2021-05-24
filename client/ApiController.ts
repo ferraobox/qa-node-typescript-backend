@@ -69,16 +69,29 @@ class ApiController {
     return bodyResult;
   }
 
+  manageOptions(method: string, endpoint: string, body: unknown, headers?: got.Headers) {
+    const options = this.options;
+    options.body = JSON.stringify(body);
+    if (headers) options.headers = headers;
+    console.log(`${method}: ${this.baseUrl}${endpoint}`.blue);
+    return options;
+  }
+
+  manageOptionsNoBody(method: string, endpoint: string, headers?: got.Headers) {
+    const options = this.options;
+    if (headers) options.headers = headers;
+    options.body = undefined;
+    console.log(`${method}: ${this.baseUrl}${endpoint}`.blue);
+    return options;
+  }
+
   /**
    * @param {endpoint} endpoint
    * @param {options} options
    * @returns {Promise}
    */
   post(endpoint: string, body: unknown, headers?: got.Headers): Promise<Response> {
-    const options = this.options;
-    options.body = JSON.stringify(body);
-    if (headers) options.headers = headers;
-    //console.log(`POST: ${this.baseUrl}${endpoint}`.blue);
+    const options = this.manageOptions('POST', endpoint, body, headers);
     return this.got
       .post(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -92,10 +105,7 @@ class ApiController {
    */
 
   get(endpoint: string, headers?: got.Headers): Promise<Response> {
-    const options = this.options;
-    if (headers) options.headers = headers;
-    options.body = undefined;
-    //console.log(`GET: ${this.baseUrl}${endpoint}`.cyan);
+    const options = this.manageOptionsNoBody('GET', endpoint, headers);
     return this.got
       .get(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -109,10 +119,7 @@ class ApiController {
    */
 
   put(endpoint: string, body: unknown, headers?: got.Headers): Promise<Response> {
-    const options = this.options;
-    options.body = JSON.stringify(body);
-    if (headers) options.headers = headers;
-    //console.log(`PUT: ${this.baseUrl}${endpoint}`.cyan);
+    const options = this.manageOptions('PUT', endpoint, body, headers);
     return this.got
       .put(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -126,10 +133,7 @@ class ApiController {
    */
 
   patch(endpoint: string, body: unknown, headers?: got.Headers): Promise<Response> {
-    const options = this.options;
-    options.body = JSON.stringify(body);
-    if (headers) options.headers = headers;
-    //console.log(`PATCH: ${this.baseUrl}${endpoint}`.cyan);
+    const options = this.manageOptions('PATCH', endpoint, body, headers);
     return this.got
       .patch(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
@@ -143,10 +147,7 @@ class ApiController {
    */
 
   delete(endpoint: string, headers?: got.Headers): Promise<Response> {
-    const options = this.options;
-    if (headers) options.headers = headers;
-    options.body = undefined;
-    //console.log(`DELETE: ${this.baseUrl}${endpoint}`.cyan);
+    const options = this.manageOptionsNoBody('DELETE', endpoint, headers);
     return this.got
       .delete(`${this.baseUrl}${endpoint}`, options)
       .then((response) => this.mapGoodResponse(endpoint, response))
