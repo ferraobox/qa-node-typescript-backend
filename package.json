@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ferraobox/qanodebackend.git"
+    "url": "https://github.com/ferraobox/qa-node-typescript-backend.git"
   },
   "scripts": {
     "test": ". ./setup/runDocker.sh && jest src/test --forceExit && . ./setup/stopDocker.sh",
