@@ -1,3 +1,9 @@
+![TypeScript](https://img.shields.io/badge/-TypeScript-000?&logo=TypeScript)
+![Node](https://img.shields.io/badge/-NodeJs-000?&logo=node-dot-js)
+![npm](https://img.shields.io/badge/-npm-000?&logo=npm)
+![MongoDB](https://img.shields.io/badge/-MongoDB-000?&logo=mongodb)
+![Jest](https://img.shields.io/badge/-jest-000?&logo=jest)
+
 ### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
 
 ### CI result - [![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
