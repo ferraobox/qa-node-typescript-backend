@@ -1,7 +1,7 @@
 /* eslint-disable no-empty-function */
 import 'reflect-metadata';
 
-export function makeTest(desc: string, cb: () => void): void {
+export function runTest(desc: string, cb: () => void): void {
   describe(desc, () => {
     //Pre-Hooks to apply all test files
     beforeAll(() => {});

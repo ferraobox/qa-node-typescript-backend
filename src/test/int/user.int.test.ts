@@ -1,10 +1,10 @@
-import { makeTest } from '../../../setup/setup';
+import { runTest } from '../../../setup/setup';
 import { UserController } from '../../controllers/UserController';
 import { newUser, newUsersList } from '../../data/UserFactory';
 import { Response } from '../../../client/CustomResponse';
 import { User } from '../../models/User';
 
-makeTest('INT - User Controller', () => {
+runTest('INT - User Controller', () => {
   let userController: UserController;
   let user: User;
   let users: User[];

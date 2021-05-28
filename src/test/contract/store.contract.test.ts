@@ -1,10 +1,10 @@
-import { makeTest } from '../../../setup/setup';
+import { runTest } from '../../../setup/setup';
 import { StoreController } from '../../controllers/StoreController';
 import { newOrder } from '../../data/StoreFactory';
 import { Response } from '../../../client/CustomResponse';
 import { Order } from '../../models/Order';
 
-makeTest('Contract test - Store Controller', () => {
+runTest('Contract test - Store Controller', () => {
   let storeController: StoreController;
   let order: Order;
 

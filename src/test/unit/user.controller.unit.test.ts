@@ -1,11 +1,11 @@
-import { makeTest } from '../../../setup/setup';
+import { runTest } from '../../../setup/setup';
 import { UserController } from '../../controllers/UserController';
 import { Response } from '../../../client/CustomResponse';
 import { ApiController } from '../../../client/ApiController';
 import { newUser, newUsersList } from '../../data/UserFactory';
 import { User } from '../../models/User';
 
-makeTest('Unit test - User Controller', () => {
+runTest('Unit test - User Controller', () => {
   const mockedBadResponse = {
     url: 'mock',
     name: 'mock',

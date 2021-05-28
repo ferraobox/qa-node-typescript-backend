@@ -1,10 +1,10 @@
-import { makeTest } from '../../../setup/setup';
+import { runTest } from '../../../setup/setup';
 import { PetController } from '../../controllers/PetController';
 import { newPet } from '../../data/PetFactory';
 import { Response } from '../../../client/CustomResponse';
 import { Pet } from '../../models/Pet';
 
-makeTest('INT - Pet Controller', () => {
+runTest('INT - Pet Controller', () => {
   let petController: PetController;
   let pet: Pet;
 
