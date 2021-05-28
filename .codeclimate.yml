@@ -1,3 +1,18 @@
+checks:
+  file-lines:
+    enabled: true
+    config:
+      threshold: 500
+  method-lines:
+    enabled: true
+    config:
+      threshold: 40
+  method-count:
+    enabled: true
+    config:
+      threshold: 40
+  similar-code:
+    enabled: false
 exclude_patterns:
   - 'src/test/'
   - '**/node_modules/'
