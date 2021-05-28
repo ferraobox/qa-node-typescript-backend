@@ -1,0 +1,58 @@
+{
+  "version": "2",
+  "checks": {
+    "argument-count": {
+      "enabled": true,
+      "config": {
+        "threshold": 5
+      }
+    },
+    "complex-logic": {
+      "enabled": true,
+      "config": {
+        "threshold": 6
+      }
+    },
+    "file-lines": {
+      "enabled": true,
+      "config": {
+        "threshold": 500
+      }
+    },
+    "method-lines": {
+      "enabled": true,
+      "config": {
+        "threshold": 40
+      }
+    },
+    "method-count": {
+      "enabled": true,
+      "config": {
+        "threshold": 40
+      }
+    },
+    "similar-code": {
+      "enabled": false
+    }
+  },
+  "plugins": {
+    "eslint": {
+      "enabled": true
+    }
+  },
+  "exclude_patterns": [
+    "config/",
+    "db/",
+    "dist/",
+    "features/",
+    "**/node_modules/",
+    "script/",
+    "**/spec/",
+    "**/test/",
+    "**/tests/",
+    "**/vendor/",
+    "**/*.d.ts",
+    "src/test/",
+    "node_modules/"
+  ]
+}
