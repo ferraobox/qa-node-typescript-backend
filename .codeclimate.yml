@@ -16,3 +16,4 @@ checks:
 exclude_patterns:
   - 'src/test/'
   - '**/node_modules/'
+  - 'node_modules/'
