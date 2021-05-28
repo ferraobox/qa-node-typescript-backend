@@ -41,13 +41,13 @@ jobs:
           path: |
             ./reports/coverage/lcov-report/
             ./reports/*.html
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: |
-            ${{github.workspace}}/reports/coverage/lcov.info:lcov
+      # - name: Test & publish code coverage
+      #   uses: paambaati/codeclimate-action@v2.7.5
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #   with:
+      #     coverageLocations: |
+      #       ${{github.workspace}}/reports/coverage/lcov.info:lcov
       - name: Bump version and push tag
         id: create_tag
         uses: mathieudutour/github-tag-action@v4.5
