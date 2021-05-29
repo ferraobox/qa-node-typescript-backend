@@ -7,11 +7,19 @@
 ![GitHubActions](https://img.shields.io/badge/-GitHubActions-000?&logo=github-actions)
 ![CodeClimate](https://img.shields.io/badge/-CodeClimate-000?&logo=code-climate)
 
-### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
+#### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
 
-### CI result - [![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
+#### CI result - [![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
 
-### Code Climate - ![Code Climate coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
+#### Code Climate
+
+<a href="https://codeclimate.com/github/ferraobox/qa-node-typescript-backend/maintainability"><img src="https://api.codeclimate.com/v1/badges/5a082c37dea0dd86f4a6/maintainability" /></a>
+<a href="https://codeclimate.com/github/ferraobox/qa-node-typescript-backend/test_coverage"><img src="https://api.codeclimate.com/v1/badges/5a082c37dea0dd86f4a6/test_coverage" /></a>
+
+#### Requirements Coverage
+
+A good point is calculate Requirements coverage, if you define all use cases on test controllers (INT or E2E) you can calculate if your test are passing throw all logic (As in UNIT tests with code climate but with INT or e2e tests as well).
+![Use cases coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
 
 # PETSTORE NODEJS TYPESCRIPT
 
