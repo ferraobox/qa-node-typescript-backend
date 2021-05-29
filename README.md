@@ -19,6 +19,7 @@
 #### Requirements Coverage
 
 A good point is calculate Requirements coverage, if you define all use cases on test controllers (INT or E2E) you can calculate if your test are passing throw all logic (As in UNIT tests with code climate but with INT or e2e tests as well).
+
 ![Use cases coverage](https://img.shields.io/codeclimate/coverage/ferraobox/qa-node-typescript-backend)
 
 # PETSTORE NODEJS TYPESCRIPT
