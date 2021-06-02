@@ -1,6 +1,6 @@
 {
   "name": "qa-node-typescript-backend",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "REST Api testing",
   "main": "index.js",
   "repository": {
@@ -11,8 +11,8 @@
     "test": ". ./setup/runDocker.sh && jest src/test --forceExit && . ./setup/stopDocker.sh",
     "test:unit": "jest src/test/unit --forceExit",
     "test:int": ". ./setup/runDocker.sh && jest src/test/int --forceExit && . ./setup/stopDocker.sh",
-    "test:contract": ". ./setup/runDocker.sh && jest src/test/contract --forceExit && . ./setup/stopDocker.sh",
-    "test:debug": "jest src/test/contract/user.contract.test.ts --detectOpenHandles --watch --verbose=false --silent=false",
+    "test:specification": ". ./setup/runDocker.sh && jest src/test/specification --forceExit && . ./setup/stopDocker.sh",
+    "test:debug": "jest src/test/specification/user.specification.test.ts --detectOpenHandles --watch --verbose=false --silent=false",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}'",
