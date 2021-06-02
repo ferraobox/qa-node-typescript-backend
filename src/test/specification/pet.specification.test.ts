@@ -4,7 +4,7 @@ import { newPet } from '../../data/PetFactory';
 import { Response } from '../../../client/CustomResponse';
 import { Pet } from '../../models/Pet';
 
-runTest('Contract test - Pet Controller', () => {
+runTest('specification test - Pet Controller', () => {
   let petController: PetController;
   let pet: Pet;
 

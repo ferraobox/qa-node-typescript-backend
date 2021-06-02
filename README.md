@@ -7,12 +7,10 @@
 ![GitHubActions](https://img.shields.io/badge/-GitHubActions-000?&logo=github-actions)
 ![CodeClimate](https://img.shields.io/badge/-CodeClimate-000?&logo=code-climate)
 
-#### Latest - ![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
+---
 
-#### CI result - [![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
-
-#### Code Climate
-
+![Release](https://img.shields.io/github/v/release/ferraobox/qa-node-typescript-backend)
+[![CI - Test](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml/badge.svg)](https://github.com/ferraobox/qa-node-typescript-backend/actions/workflows/release.yml)
 <a href="https://codeclimate.com/github/ferraobox/qa-node-typescript-backend/maintainability"><img src="https://api.codeclimate.com/v1/badges/5a082c37dea0dd86f4a6/maintainability" /></a>
 <a href="https://codeclimate.com/github/ferraobox/qa-node-typescript-backend/test_coverage"><img src="https://api.codeclimate.com/v1/badges/5a082c37dea0dd86f4a6/test_coverage" /></a>
 

@@ -4,7 +4,7 @@ import { newOrder } from '../../data/StoreFactory';
 import { Response } from '../../../client/CustomResponse';
 import { Order } from '../../models/Order';
 
-runTest('Contract test - Store Controller', () => {
+runTest('specification test - Store Controller', () => {
   let storeController: StoreController;
   let order: Order;
 

@@ -4,7 +4,7 @@ import { newUser, newUsersList } from '../../data/UserFactory';
 import { Response } from '../../../client/CustomResponse';
 import { User } from '../../models/User';
 
-runTest('Contract test - User Controller', () => {
+runTest('specification test - User Controller', () => {
   let userController: UserController;
   let user: User;
   let users: User[];
