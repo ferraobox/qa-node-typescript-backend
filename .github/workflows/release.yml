@@ -45,7 +45,7 @@ jobs:
             ${{github.workspace}}/reports/coverage/lcov.info:lcov
       - name: Start application
         run: |
-          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+          echo "DOCKER_CONTAINER_ID=$(. ./setup/runDocker.sh)" >> $GITHUB_ENV
       - name: Run SPECIFICATION test
         run: |
           npm run test:specification
