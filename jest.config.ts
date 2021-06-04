@@ -1,7 +1,9 @@
-const { defaults } = require('jest-config');
+import { defaults } from 'jest-config';
+import type { Config } from '@jest/types';
 const basePathToIgnore = ['.github/', './node_modules/'];
 const pathsToTest = ['./src/controllers/**.ts'];
-module.exports = {
+const testLayer = process.argv[4];
+const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   reporters: [
@@ -9,8 +11,8 @@ module.exports = {
     [
       'jest-html-reporters',
       {
-        publicPath: './reports',
-        filename: 'the-pet-store-test-results.html',
+        publicPath: `./reports`,
+        filename: `pet-store-${testLayer.toUpperCase()}-test-results.html`,
         expand: true,
       },
     ],
@@ -24,3 +26,4 @@ module.exports = {
   moduleFileExtensions: defaults.moduleFileExtensions,
   testPathIgnorePatterns: basePathToIgnore,
 };
+export default config;

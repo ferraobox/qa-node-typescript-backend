@@ -8,10 +8,12 @@
     "url": "https://github.com/ferraobox/qa-node-typescript-backend.git"
   },
   "scripts": {
-    "test": ". ./setup/runDocker.sh && jest src/test --forceExit && . ./setup/stopDocker.sh",
-    "test:unit": "jest src/test/unit --forceExit",
-    "test:int": ". ./setup/runDocker.sh && jest src/test/int --forceExit && . ./setup/stopDocker.sh",
-    "test:specification": ". ./setup/runDocker.sh && jest src/test/specification --forceExit && . ./setup/stopDocker.sh",
+    "start:app": ". ./setup/runDocker.sh",
+    "stop:app": ". ./setup/stopDocker.sh",
+    "test": "jest src/test --forceExit",
+    "test:unit": "jest src/test/unit --forceExit unit",
+    "test:int": "jest src/test/int --forceExit int",
+    "test:specification": "jest src/test/specification --forceExit spec",
     "test:debug": "jest src/test/specification/user.specification.test.ts --detectOpenHandles --watch --verbose=false --silent=false",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
@@ -62,6 +64,7 @@
     "colors": "^1.4.0",
     "got": "^11.8.1",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.0.0",
     "typeorm": "^0.2.32"
   }
 }

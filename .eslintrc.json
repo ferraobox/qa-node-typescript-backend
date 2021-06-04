@@ -29,7 +29,7 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "jest/valid-title": "off",
+    "jest/valid-title": "warn",
     "no-restricted-syntax": "warn",
     "no-await-in-loop": "warn",
     "camelcase": "off",
