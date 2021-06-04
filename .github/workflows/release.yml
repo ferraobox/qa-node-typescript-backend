@@ -45,7 +45,7 @@ jobs:
             ${{github.workspace}}/reports/coverage/lcov.info:lcov
       - name: Start application
         run: |
-          echo '::set-env name=DOCKER_CONTAINER_ID::$(. ./setup/runDocker.sh)'
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
       - name: Run SPECIFICATION test
         run: |
           npm run test:specification
@@ -71,7 +71,7 @@ jobs:
           default_bump: minor
           release_branches: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: print tag
+      - name: Print tag
         run: echo ${{ steps.create_tag.outputs.new_tag }}
       - name: get commit message
         run: |
