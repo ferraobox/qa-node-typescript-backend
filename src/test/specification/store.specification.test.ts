@@ -12,13 +12,6 @@ runTest('specification test - Store Controller', () => {
     storeController = new StoreController('http://localhost:8080/api/v3');
   });
 
-  test('Get inventories by status - 200 OK - check swagger specification', async () => {
-    const response: Response = await storeController.inventoriesByStatus();
-    expect(response.statusCode).toEqual(200);
-    const swaggerErrors = globalThis.swagger.validateSchema('/store/inventory', 'get', response.statusCode, response.body);
-    expect(swaggerErrors.length === 0).toBeTruthy();
-  });
-
   test('Add new Order - 200 OK - check swagger specification', async () => {
     order = newOrder();
     const response: Response = await storeController.placeAnOrder(order);
