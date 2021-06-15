@@ -36,16 +36,22 @@ jobs:
       - name: Run ESLINT
         run: |
           npm run lint
-      - name: Code coverage
+      - name: Publish - Code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageLocations: |
             ${{github.workspace}}/reports/coverage/lcov.info:lcov
+      - name: Run CONTRACT test - CONSUMER SIDE
+        run: |
+          npm run test:contract:consumer
       - name: Start application
         run: |
-          echo "DOCKER_CONTAINER_ID=$(. ./setup/runDocker.sh)" >> $GITHUB_ENV
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+      - name: Run CONTRACT test - CHECK PROVIDER SIDE
+        run: |
+          npm run test:contract:provider
       - name: Run SPECIFICATION test
         run: |
           npm run test:specification
