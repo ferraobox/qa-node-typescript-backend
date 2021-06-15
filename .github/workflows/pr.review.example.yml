@@ -11,6 +11,7 @@ on:
 env:
   ACT_NODE_VERSION: 14
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  DOCKER_CONTAINER_ID: 0
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   release:
@@ -48,7 +49,10 @@ jobs:
           npm run test:contract:consumer
       - name: Start application
         run: |
-          echo $(. ./setup/runDocker.sh) > $DOCKER_CONTAINER_ID
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+      - name: Wait for 15 seconds
+        run: sleep 15s
+        shell: bash
       - name: Run CONTRACT test - CHECK PROVIDER SIDE
         run: |
           npm run test:contract:provider
