@@ -62,9 +62,6 @@ jobs:
       - name: Run INT test
         run: |
           npm run test:int
-      - name: Stop application
-        run: |
-          npm run stop:app
       - name: Upload reports
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
