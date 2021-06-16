@@ -1,6 +1,6 @@
 {
   "name": "qa-node-typescript-backend",
-  "version": "0.18.0",
+  "version": "0.20.0",
   "description": "REST Api testing",
   "main": "index.js",
   "repository": {
@@ -22,7 +22,7 @@
     "test:debug": "jest src/test/specification/user.specification.test.ts --detectOpenHandles --watch --verbose=false --silent=false",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts}'",
+    "lint": "rm -rf ./dist && tsc --noEmit && eslint '*/**/*.{js,ts}'",
     "bump": "npm version $VERSION --no-git-tag-version",
     "postbump": "git add package.json package-lock.json && git commit -m 'Bump version'",
     "prepare": "husky install"

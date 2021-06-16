@@ -1,6 +1,6 @@
 import { defaults } from 'jest-config';
 import type { Config } from '@jest/types';
-const basePathToIgnore = ['.github/', './node_modules/'];
+const basePathToIgnore = ['.github/', './node_modules/', './dist'];
 const pathsToTest = ['./src/controllers/**.ts'];
 const testLayer = process.argv[4];
 const config: Config.InitialOptions = {

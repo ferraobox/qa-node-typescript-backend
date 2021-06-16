@@ -31,12 +31,15 @@ jobs:
       - name: Install dependences
         run: |
           npm i
-      - name: Run UNIT test
-        run: |
-          npm run test:unit
       - name: Run ESLINT
         run: |
           npm run lint
+      - name: Build
+        run: |
+          npm run build
+      - name: Run UNIT test
+        run: |
+          npm run test:unit
       - name: Publish - Code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:

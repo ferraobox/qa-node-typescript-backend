@@ -55,7 +55,7 @@ On Terminal into project path:
 ### CI Checks
 
 To simulate the PR review pipeline, I've changed the webhook event for master branch push.
-![Alt text](pr-checks.png?raw=true 'R Checks')
+![Alt text](pr-review.png?raw=true 'R Checks')
 
 ### Github tools
 
