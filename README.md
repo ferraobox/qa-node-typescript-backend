@@ -45,13 +45,22 @@ On Terminal into project path:
 
 ```
 > npm i
-> npm run test
+> npm run test:unit
+> npm run test:contract:consumer
+> npm run test:contract:provider
+> npm run test:int
+> npm run test:specification
 ```
+
+### CI Checks
+
+To simulate the PR review pipeline, I've changed the webhook event for master branch push.
+![Alt text](pr-checks.png?raw=true 'R Checks')
 
 ### Github tools
 
 - Github actions for automating the release
-- Pull request tempplate
+- Pull request tempplate (with all checks)
 
 A list of test cases proposed for automation:
 
