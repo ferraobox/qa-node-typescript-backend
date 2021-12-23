@@ -11,35 +11,68 @@ on:
     branches: [master]
 
 env:
-  ACT_NODE_VERSION: 14
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   DOCKER_CONTAINER_ID: 0
+  NODE_VERSION: 16.13.0
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  prepare:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
-        id: checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
         with:
-          ref: ${{ github.event.client_payload.branch }}
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          submodules: 'recursive'
-      - name: Setup node
-        uses: actions/setup-node@v2
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        id: cache-node-modules
         with:
-          node-version: ${{env.ACT_NODE_VERSION}}
-      - name: Install dependences
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: |
           npm i
-      - name: Run ESLINT
-        run: |
+  lint:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - run: |
           npm run lint
-      - name: Build
-        run: |
+  build:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - run: |
           npm run build
-      - name: Run UNIT test
+  test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Unit test
         run: |
           npm run test:unit
       - name: Publish - Code coverage
@@ -49,9 +82,33 @@ jobs:
         with:
           coverageLocations: |
             ${{github.workspace}}/reports/coverage/lcov.info:lcov
+  contract-test-consumer:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Run CONTRACT test - CONSUMER SIDE
         run: |
           npm run test:contract:consumer
+  contract-test-provider:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Start application
         run: |
           echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
@@ -61,9 +118,34 @@ jobs:
       - name: Run CONTRACT test - CHECK PROVIDER SIDE
         run: |
           npm run test:contract:provider
+
+  specification-test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Run SPECIFICATION test
         run: |
           npm run test:specification
+  acceptance-test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Run INT test
         run: |
           npm run test:int
@@ -75,6 +157,18 @@ jobs:
           path: |
             ./reports/coverage/lcov-report/
             ./reports/*.html
+  release:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Bump version and push tag
         id: create_tag
         uses: mathieudutour/github-tag-action@v4.5
