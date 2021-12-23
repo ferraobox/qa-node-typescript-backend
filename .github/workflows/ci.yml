@@ -1,0 +1,200 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ci
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  DOCKER_CONTAINER_ID: 0
+  NODE_VERSION: 16.13.0
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  prepare:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        id: cache-node-modules
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: |
+          npm i
+  lint:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - run: |
+          npm run lint
+  build:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - run: |
+          npm run build
+  test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Unit test
+        run: |
+          npm run test:unit
+      - name: Publish - Code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: |
+            ${{github.workspace}}/reports/coverage/lcov.info:lcov
+  contract-test-consumer:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Run CONTRACT test - CONSUMER SIDE
+        run: |
+          npm run test:contract:consumer
+  contract-test-provider:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Start application
+        run: |
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+      - name: Wait for 15 seconds
+        run: sleep 15s
+        shell: bash
+      - name: Run CONTRACT test - CHECK PROVIDER SIDE
+        run: |
+          npm run test:contract:provider
+
+  specification-test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Run SPECIFICATION test
+        run: |
+          npm run test:specification
+  acceptance-test:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Run INT test
+        run: |
+          npm run test:int
+      - name: Upload reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: |
+            ./reports/coverage/lcov-report/
+            ./reports/*.html
+  release:
+    needs: prepare
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v2.1.4
+        with:
+          path: './node_modules'
+          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Bump version and push tag
+        id: create_tag
+        uses: mathieudutour/github-tag-action@v4.5
+        with:
+          tag_prefix: ~
+          default_bump: minor
+          release_branches: master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Print tag
+        run: echo ${{ steps.create_tag.outputs.new_tag }}
+      - name: get commit message
+        run: |
+          echo ::set-env name=COMMIT_MSG::$(git log --format=%B -n 1 ${{ github.event.after }})
+      - name: show commit message
+        run: |
+          echo * Last commit: ${{ env.COMMIT_MSG }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ steps.create_tag.outputs.new_version }}
+          release_name: Release ${{ steps.create_tag.outputs.new_version }}
+          body: |
+            Release notes:
+            - ${{ env.COMMIT_MSG }}
+          draft: false
+          prerelease: false
