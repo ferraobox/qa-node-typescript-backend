@@ -79,4 +79,4 @@ The Artifacts are on workflow action section.
 
 https://github.com/ferraobox/qa-node-typescript-backend/actions/
 
-you can check them opening the specific run
+you can check them opening the specific run.

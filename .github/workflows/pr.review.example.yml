@@ -8,7 +8,7 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 env:
   ACT_NODE_VERSION: 14
