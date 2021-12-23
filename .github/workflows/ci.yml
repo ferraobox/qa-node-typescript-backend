@@ -7,7 +7,9 @@ name: PR Review
 on:
   push:
     branches: [master]
-  workflow_dispatch:
+  pull_request:
+    branches: [master]
+
 env:
   ACT_NODE_VERSION: 14
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
