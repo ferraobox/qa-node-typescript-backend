@@ -60,7 +60,7 @@ jobs:
           key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - run: |
           npm run build
-  test:
+  unit-test:
     needs: prepare
     runs-on: ubuntu-20.04
     steps:
@@ -82,8 +82,8 @@ jobs:
         with:
           coverageLocations: |
             ${{github.workspace}}/reports/coverage/lcov.info:lcov
-  contract-test-consumer:
-    needs: prepare
+  contract-test:
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -97,18 +97,6 @@ jobs:
       - name: Run CONTRACT test - CONSUMER SIDE
         run: |
           npm run test:contract:consumer
-  contract-test-provider:
-    needs: prepare
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - uses: actions/cache@v2.1.4
-        with:
-          path: './node_modules'
-          key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
       - name: Start application
         run: |
           echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
@@ -118,9 +106,8 @@ jobs:
       - name: Run CONTRACT test - CHECK PROVIDER SIDE
         run: |
           npm run test:contract:provider
-
   specification-test:
-    needs: prepare
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -135,7 +122,7 @@ jobs:
         run: |
           npm run test:specification
   acceptance-test:
-    needs: prepare
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -158,7 +145,7 @@ jobs:
             ./reports/coverage/lcov-report/
             ./reports/*.html
   release:
-    needs: prepare
+    needs: [acceptance-test, specification-test, contract-test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
