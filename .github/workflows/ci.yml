@@ -118,6 +118,12 @@ jobs:
         with:
           path: './node_modules'
           key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Start application
+        run: |
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+      - name: Wait for 15 seconds
+        run: sleep 15s
+        shell: bash
       - name: Run SPECIFICATION test
         run: |
           npm run test:specification
@@ -133,6 +139,12 @@ jobs:
         with:
           path: './node_modules'
           key: package-lock-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+      - name: Start application
+        run: |
+          echo $(. ./setup/runDocker.sh) >> $DOCKER_CONTAINER_ID
+      - name: Wait for 15 seconds
+        run: sleep 15s
+        shell: bash
       - name: Run INT test
         run: |
           npm run test:int
